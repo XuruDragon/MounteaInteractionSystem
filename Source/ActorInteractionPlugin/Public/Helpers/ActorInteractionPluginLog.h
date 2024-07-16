@@ -1,4 +1,4 @@
-// Copyright Dominik Morse (Pavlicek) 2024. All Rights Reserved.
+// Copyright Dominik Pavlicek 2022. All Rights Reserved.
 
 #pragma once
 
@@ -7,27 +7,12 @@
 // Log category definition
 ACTORINTERACTIONPLUGIN_API DECLARE_LOG_CATEGORY_EXTERN(LogActorInteraction, Display, All);
 
-// Forward declaration of the logging function
-void PrintInteractionLog(const FString& Message, const FLinearColor Color, const float Duration);
-
-// Logging macro definitions
-#define LOG_INFO(Format, ...) \
+#define AIP_LOG(Verbosity, Format, ...) \
 { \
-FString FormattedMessage = FString::Printf(Format, ##__VA_ARGS__); \
-UE_LOG(LogActorInteraction, Log, TEXT("%s"), *FormattedMessage); \
-PrintInteractionLog(FormattedMessage, FLinearColor(0.0f, 1.0f, 0.0f), 5.0f); \
+	UE_LOG(LogActorInteraction, Verbosity, Format, ##__VA_ARGS__); \
 }
 
-#define LOG_WARNING(Format, ...) \
+#define AIntP_LOG(Verbosity, Format, ...) \
 { \
-FString FormattedMessage = FString::Printf(Format, ##__VA_ARGS__); \
-UE_LOG(LogActorInteraction, Warning, TEXT("%s"), *FormattedMessage); \
-PrintInteractionLog(FormattedMessage, FLinearColor(1.0f, 1.0f, 0.0f), 10.0f); \
-}
-
-#define LOG_ERROR(Format, ...) \
-{ \
-FString FormattedMessage = FString::Printf(Format, ##__VA_ARGS__); \
-UE_LOG(LogActorInteraction, Error, TEXT("%s"), *FormattedMessage); \
-PrintInteractionLog(FormattedMessage, FLinearColor(1.0f, 0.0f, 0.0f), 15.0f); \
+	UE_LOG(LogActorInteraction, Verbosity, Format, ##__VA_ARGS__); \
 }
